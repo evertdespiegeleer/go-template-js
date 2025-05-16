@@ -1,0 +1,25 @@
+{
+  "name": "@evert/go-template",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "scripts": {
+    "dev": "npm run build:go && node --experimental-transform-types ./src/main.ts",
+    "build:go": "./scripts/build-go.sh",
+    "build": "npm run build:go && tsc && cp -p ./src/main.wasm ./dist/main.wasm",
+    "test": "npm run build:go && node --test --experimental-transform-types ./src/**/*.test.ts"
+  },
+  "author": "Evert De Spiegeleer",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/evertdespiegeleer/go-templates-js"
+  },
+  "description": "A basic Node.js wrapper for the Go template engine",
+  "devDependencies": {
+    "@types/golang-wasm-exec": "^1.15.2",
+    "@types/node": "^22.15.18",
+    "@types/webassembly-js-api": "^0.0.3",
+    "typescript": "^5.8.3"
+  }
+}

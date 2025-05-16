@@ -1,0 +1,4 @@
+main.wasm
+wasm_exec.js
+dist
+node_modules

@@ -36,6 +36,7 @@ jobs:
           go-version: 1.24
       - run: npm ci
       - run: npm run init
+      - run: npm run test
 
   publish-npm:
     runs-on: ubuntu-latest

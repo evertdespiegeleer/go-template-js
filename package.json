@@ -6,7 +6,7 @@
     "url": "git+https://github.com/evertdespiegeleer/go-template-js.git"
   },
   "description": "A Node wrapper for the Go template engine",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "type": "module",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",

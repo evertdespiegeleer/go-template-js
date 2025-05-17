@@ -15,3 +15,5 @@ then
     nvm install
     nvm use
 fi
+
+npm ci

@@ -1,4 +1,4 @@
-# @evertdespiegeleer/go-template (⚠️ WIP)
+# @evertdespiegeleer/go-template
 A (wasm based) Node wrapper for the Go template engine
 
 ## Installation

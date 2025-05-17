@@ -1,7 +1,7 @@
 # @evertdespiegeleer/go-template
 A (wasm based) Node wrapper for the Go template engine
 
-The inner workings are totally different, but the library heavilly is inspired by [@ctrl/golang-template](https://github.com/scttcper/golang-template).
+While the inner workings are totally different, the library is heavilly inspired by [@ctrl/golang-template](https://github.com/scttcper/golang-template).
 
 ## Installation
 ```sh

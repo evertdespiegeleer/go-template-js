@@ -14,6 +14,17 @@ describe("Templating Engine", () => {
         assert.equal(result, "Hello John! You have 5 unread messages.");
     });
 
+    test("should be able to render a bunch of templates", async () => {
+        const { parse } = await import('./main.ts')
+        const results = await Promise.all(Array.from({length: 100}, (_, index) => parse("Hello {{ .number }}!", { number: index })))
+        assert.deepEqual(results, Array.from({length: 100}, (_, index) => `Hello ${index}!`));
+
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        const results2 = await Promise.all(Array.from({length: 100}, (_, index) => parse("Hello {{ .number }}!", { number: index })))
+        assert.deepEqual(results2, Array.from({length: 100}, (_, index) => `Hello ${index}!`));
+    });
+
     test("should throw expected error in case a value is missing", async () => {
         const { parse } = await import('./main.ts')
         try {

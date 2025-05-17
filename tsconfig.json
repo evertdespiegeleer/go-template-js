@@ -1,5 +1,6 @@
 // Based on https://www.totaltypescript.com/tsconfig-cheat-sheet
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     /* Base Options: */
     "esModuleInterop": true,
@@ -28,5 +29,6 @@
     "lib": ["es2022"],
 
     "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true
   }
 }

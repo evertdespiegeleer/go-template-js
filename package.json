@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/golang-wasm-exec": "^1.15.2",
     "@types/node": "^22.15.18",
-    "@types/webassembly-js-api": "^0.0.3",
+    "@types/webassembly-js-api": "^2.0.0",
     "typescript": "^5.8.3"
   }
 }

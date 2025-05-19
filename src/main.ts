@@ -6,13 +6,23 @@ import { InvalidTemplateError, TemplatingError } from "./errors.ts";
 const go = new Go();
 const __filename = new URL(import.meta.url).pathname;
 const __dirname = new URL(__filename, import.meta.url).pathname;
+let wasmInstance: WebAssembly.Instance;
 
-export const parse = async (template: string, values: any) => {
+const initWasm = async () => {
+    if (wasmInstance != null) {
+        return wasmInstance;
+    }
     const wasmBuffer = await fs.readFile(path.join(__dirname, "../main.wasm"));
     const { instance } = await WebAssembly.instantiate(wasmBuffer, go.importObject);
-    go.run(instance);
+    wasmInstance = instance
+    go.run(wasmInstance);
+    return wasmInstance;
+}
+
+export const parse = async (template: string, values: any) => {
+    await initWasm();
+
     const result = (globalThis as any).Render(template, JSON.stringify(values)) as string;
-    go.exit(0);
 
     if (result.startsWith('Template exec error:')) {
         throw new TemplatingError(result.match(/Template exec error:.+?executing "tpl".+?: (.+)/)?.[1])

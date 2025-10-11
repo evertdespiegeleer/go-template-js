@@ -1,18 +1,19 @@
 import fs from "node:fs/promises";
 import "./wasm_exec.js";
 import path from "node:path";
+import {fileURLToPath} from "node:url";
 import { InvalidTemplateError, TemplatingError } from "./errors.ts";
 
 const go = new Go();
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = new URL(__filename, import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 let wasmInstance: WebAssembly.Instance;
 
 const initWasm = async () => {
     if (wasmInstance != null) {
         return wasmInstance;
     }
-    const wasmBuffer = await fs.readFile(path.join(__dirname, "../main.wasm"));
+    const wasmBuffer = await fs.readFile(path.join(__dirname, "main.wasm"));
     const { instance } = await WebAssembly.instantiate(wasmBuffer, go.importObject);
     wasmInstance = instance
     go.run(wasmInstance);

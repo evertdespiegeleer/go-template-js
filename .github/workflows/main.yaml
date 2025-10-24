@@ -21,7 +21,7 @@ jobs:
       - run: npm run init
       - run: npm run build
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: node
           path: dist
@@ -52,7 +52,7 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org/
       - name: Download Node build Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: "node"
           path: dist

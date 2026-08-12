@@ -19,6 +19,7 @@
 
     /* If transpiling with TypeScript: */
     "module": "NodeNext",
+    "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
 
@@ -27,6 +28,9 @@
 
     /* If your code doesn't run in the DOM: */
     "lib": ["es2022"],
+
+    /* TypeScript 7 no longer includes every installed `@types/*` package automatically. */
+    "types": ["node", "golang-wasm-exec", "webassembly-js-api"],
 
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true

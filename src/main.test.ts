@@ -71,4 +71,28 @@ describe("Templating Engine", () => {
             )
         }
     });
+
+    test("should render numbers without scientific notation", async () => {
+        const { parse } = await import('./main.ts')
+        assert.equal(await parse("{{ .n }} {{ .f }}", { n: 1000000, f: 1.5 }), "1000000 1.5");
+    });
+
+    test("should not treat output resembling an error as an error", async () => {
+        const { parse } = await import('./main.ts')
+        assert.equal(await parse("Template parse error: {{ .x }}", { x: 1 }), "Template parse error: 1");
+    });
+
+    test("should accept undefined values", async () => {
+        const { parse } = await import('./main.ts')
+        assert.equal(await parse("Hello", undefined), "Hello");
+    });
+
+    test("should keep the error message when it doesn't match the expected format", async () => {
+        const { parse } = await import('./main.ts')
+        await assert.rejects(
+            parse('{{ define "a" }}{{ template "a" . }}{{ end }}{{ template "a" . }}', {}),
+            (error: Error) => error.name === "TemplatingError" && error.message !== "",
+        );
+        assert.equal(await parse("{{ .x }}", { x: 1 }), "1");
+    });
 })

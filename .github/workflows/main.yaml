@@ -45,6 +45,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: ${{ github.event_name == 'release' }}
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing (OIDC)
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -58,5 +61,3 @@ jobs:
           path: dist
           merge-multiple: true
       - run: npm publish --access=public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

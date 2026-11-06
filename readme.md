@@ -27,6 +27,9 @@ await parse('{{ range . }}Hi {{ .name }}!\n{{ end }}', [
 // Hi John!
 ```
 
+## Memory usage
+The Go runtime lives in WebAssembly memory, which can grow but never shrinks. A long-running process keeps the memory of its largest render (template, values and output combined) for its whole lifetime.
+
 ## Development
 Init the repo
 ```sh
